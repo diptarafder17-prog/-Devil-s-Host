@@ -3,16 +3,16 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>DIPTARAFDER PROFILE</title>
+  <title>Gravity Profile — About_Dip (Upper Left)</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
   <style>
     :root{
       --card-w: 360px;
       --accent-1: #6be7ff;
       --accent-2: #bc79ff;
-      --deep-1: #05020a;
-      --glass: rgba(255,255,255,0.03);
-      --bg-image: url("https://i.ibb.co/0yNGDTV0/2034-Picsart-Ai-Image-Enhancer.jpg");
+      --bg-img: url("https://i.ibb.co/0yNGDTV0/2034-Picsart-Ai-Image-Enhancer.jpg");
+      --panel-w: 320px;
     }
 
     *{box-sizing:border-box}
@@ -20,69 +20,152 @@
     body{
       margin:0;
       font-family: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial;
-      background: var(--deep-1);
-      overflow:hidden;
+      background: #05020a;
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
       display:flex;
       align-items:center;
       justify-content:center;
       padding:24px;
+      overflow:hidden;
     }
 
-    /* Fullscreen background layer using the user's picture */
+    /* Fullscreen background image (sharp source) */
     .bg {
       position:fixed;
       inset:0;
       z-index:0;
       pointer-events:none;
-      overflow:hidden;
-      display:block;
+      background-image: var(--bg-img);
+      background-size:cover;
+      background-position:center center;
+      transform: scale(1.03);
     }
 
-    /* Blurred photo layer (uses the provided image) */
-    .bg::before{
-      content:"";
-      position:absolute;
-      inset:-10%;
-      background-image: var(--bg-image);
-      background-size: cover;
-      background-position: center center;
-      transform: scale(1.06);
-      filter: blur(14px) saturate(1.05) contrast(0.95);
-      opacity:0.95;
-      will-change: transform, filter;
-    }
-
-    /* Soft color wash over the blurred photo to keep contrast readable */
+    /* Blur + color overlay on top of the background image */
     .bg::after{
       content:"";
       position:absolute;
       inset:0;
+      backdrop-filter: blur(14px) saturate(1.05) contrast(0.95);
+      -webkit-backdrop-filter: blur(14px) saturate(1.05) contrast(0.95);
       background: linear-gradient(180deg, rgba(6,6,12,0.45), rgba(8,6,18,0.55));
       mix-blend-mode: multiply;
       pointer-events:none;
     }
 
-    /* subtle moving light band to add life */
-    .light-band{
+    .bg::before{
+      content:"";
       position:absolute;
-      left:-30%;
-      top:10%;
-      width:160%;
-      height:28%;
-      background: linear-gradient(90deg, rgba(107,231,255,0.06), rgba(188,121,255,0.06), rgba(255,200,120,0.03));
-      filter: blur(28px);
-      transform: rotate(-6deg);
-      opacity:0.9;
-      animation: bandMove 12s ease-in-out infinite;
+      inset:0;
+      background: radial-gradient(60% 60% at 50% 40%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.45) 100%);
       pointer-events:none;
-      z-index:1;
     }
-    @keyframes bandMove {
-      0%{ transform: translateX(-6%) rotate(-6deg) }
-      50%{ transform: translateX(6%) rotate(-5deg) }
-      100%{ transform: translateX(-6%) rotate(-6deg) }
+
+    /* About button placed upper-left */
+    .about-btn {
+      position:fixed;
+      left:18px;
+      top:18px;
+      z-index:30;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 12px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      border:1px solid rgba(255,255,255,0.06);
+      color:#fff;
+      border-radius:12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      cursor:pointer;
+      user-select:none;
+      transition: transform 180ms ease, box-shadow 180ms ease, background 220ms;
+      backdrop-filter: blur(6px);
+    }
+
+    .about-btn:active{ transform: scale(0.98); }
+    .about-btn:hover{ transform: translateY(-2px); box-shadow: 0 18px 40px rgba(0,0,0,0.7); }
+
+    .about-btn i{ width:28px; height:28px; display:inline-grid; place-items:center; border-radius:8px; background:rgba(255,255,255,0.03); color:var(--accent-1); }
+
+    /* Slide-in about panel */
+    .about-panel {
+      position:fixed;
+      left: -1px;
+      top:0;
+      bottom:0;
+      width:var(--panel-w);
+      max-width:92vw;
+      transform: translateX(calc(-100% - 8px));
+      z-index:28;
+      background: linear-gradient(180deg, rgba(12,10,18,0.98), rgba(8,6,18,0.96));
+      border-right: 1px solid rgba(255,255,255,0.04);
+      box-shadow: 8px 0 40px rgba(0,0,0,0.6);
+      padding:22px;
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+      transition: transform 360ms cubic-bezier(.2,.9,.3,1);
+      will-change: transform;
+      overflow:auto;
+    }
+
+    .about-panel.open { transform: translateX(0); }
+
+    .about-header{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .about-header h3{
+      margin:0;
+      color:#fff;
+      font-size:1.05rem;
+      letter-spacing:1px;
+      font-weight:600;
+    }
+
+    .about-close{
+      margin-left:auto;
+      background:transparent;
+      border:none;
+      color:rgba(255,255,255,0.7);
+      font-size:1.1rem;
+      cursor:pointer;
+      padding:6px;
+      border-radius:8px;
+    }
+    .about-close:hover{ background: rgba(255,255,255,0.02); }
+
+    .about-content{
+      color:rgba(255,255,255,0.9);
+      font-size:0.95rem;
+      line-height:1.5;
+    }
+
+    .about-row{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      padding:12px;
+      border-radius:10px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+      border:1px solid rgba(255,255,255,0.02);
+    }
+
+    .label{
+      min-width:84px;
+      color:rgba(255,255,255,0.65);
+      font-weight:700;
+      font-size:0.85rem;
+    }
+
+    .value{
+      color:#fff;
+      font-weight:600;
+      font-size:0.95rem;
+      word-break:break-word;
     }
 
     /* Foreground stage */
@@ -95,7 +178,6 @@
       align-items:center;
       justify-content:center;
       perspective:1200px;
-      padding:20px;
     }
 
     /* Card */
@@ -119,19 +201,13 @@
       -webkit-backdrop-filter: blur(6px);
     }
 
-    @keyframes floatY {
-      0%{ transform: translateY(0px) }
-      50%{ transform: translateY(-12px) }
-      100%{ transform: translateY(0px) }
-    }
-    .card.float { animation: floatY 6s ease-in-out infinite; }
-
     .card:hover{
-      transform: rotateX(4deg) rotateY(-4deg) translateY(-6px) scale(1.01);
-      box-shadow: 0 40px 80px rgba(2,6,23,0.7);
+      transform: translateY(-6px) scale(1.01);
+      box-shadow: 0 40px 90px rgba(2,6,23,0.75);
     }
 
-    /* Round avatar holder (crisp, unblurred) */
+    .top-clear { height:8px; width:100%; pointer-events:none; }
+
     .avatar-wrap{
       width:140px;
       height:140px;
@@ -145,7 +221,6 @@
       margin-top:6px;
       position:relative;
       z-index:12;
-      backdrop-filter: none;
     }
 
     .avatar{
@@ -158,35 +233,33 @@
       border: 3px solid rgba(255,255,255,0.04);
     }
 
-    /* Use the same image but keep it sharp inside the avatar */
     .avatar img{
       width:100%;
       height:100%;
       object-fit:cover;
       display:block;
-      transform-origin:center;
-      transition: transform 300ms ease;
       -webkit-user-drag: none;
       user-select: none;
+      transform-origin:center;
+      transition: transform 300ms ease;
       filter: none;
     }
 
     .name{
-      margin-top:14px;
+      margin-top:6px;
       color:#fff;
       font-weight:600;
-      letter-spacing:2px;
+      letter-spacing:1.5px;
       font-size:1rem;
       text-transform:uppercase;
-      text-shadow: 0 6px 18px rgba(188,121,255,0.04);
       z-index:12;
     }
 
     .social-bar{
       display:flex;
       flex-direction:column;
-      gap:12px;
-      margin-top:16px;
+      gap:10px;
+      margin-top:8px;
       width:100%;
       z-index:12;
     }
@@ -195,7 +268,7 @@
       display:flex;
       align-items:center;
       gap:12px;
-      padding:12px 16px;
+      padding:12px 14px;
       border-radius:12px;
       text-decoration:none;
       color:#fff;
@@ -220,47 +293,87 @@
       flex-shrink:0;
     }
 
-    .btn:hover{ transform: translateY(-4px); background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)); }
+    .btn:hover{ transform: translateY(-3px); background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)); }
     .btn:active{ transform: scale(0.98); background: linear-gradient(180deg, var(--accent-2), var(--accent-1)); color:#0b0712; }
-
-    .btn.whatsapp i{ background: linear-gradient(180deg,#25D366,#1FAF4B); color:#fff; }
-    .btn.instagram i{ background: radial-gradient(circle at 30% 20%, #ffd, #ff7a7a); color:#fff; }
-    .btn.facebook i{ background: linear-gradient(180deg,#3b5998,#2d4373); color:#fff; }
 
     .contact-pill{
       display:inline-flex;
       gap:10px;
       align-items:center;
-      margin-top:14px;
+      margin-top:6px;
       padding:10px 18px;
       border-radius:999px;
       background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      color:rgba(255,255,255,0.65);
+      color:rgba(255,255,255,0.75);
       font-size:0.9rem;
       border:1px solid rgba(255,255,255,0.03);
       box-shadow: 0 6px 18px rgba(2,6,23,0.45);
       z-index:12;
     }
 
+    .about-footer{
+      margin-top:auto;
+      font-size:0.85rem;
+      color:rgba(255,255,255,0.6);
+      text-align:center;
+      padding-top:8px;
+    }
+
     /* Responsive */
     @media (max-width:880px){
+      .about-btn{ left:12px; top:12px; padding:8px 10px; }
+      .about-panel{ width:92vw; }
       .card{ width:92vw; max-width:420px; }
     }
 
     @media (prefers-reduced-motion: reduce){
-      .light-band, .card.float { animation: none; }
+      .about-panel, .about-btn, .card{ transition:none; }
+      .bg::after{ -webkit-backdrop-filter:none; backdrop-filter:none; filter:none; }
     }
   </style>
 </head>
 <body>
-  <!-- Background layers: blurred photo + color wash + moving band -->
-  <div class="bg" aria-hidden="true">
-    <div class="light-band" aria-hidden="true"></div>
-  </div>
+  <!-- Background image (full-screen) with blur/color overlay applied via pseudo-element -->
+  <div class="bg" aria-hidden="true"></div>
+
+  <!-- About button now positioned upper-left -->
+  <button class="about-btn" id="aboutBtn" aria-expanded="false" aria-controls="aboutPanel" title="About_Dip">
+    <i class="fas fa-user" aria-hidden="true"></i>
+    <span style="font-weight:700;letter-spacing:0.6px">About_Dip</span>
+  </button>
+
+  <!-- Slide-in About panel -->
+  <aside class="about-panel" id="aboutPanel" role="region" aria-label="About Dip information" aria-hidden="true">
+    <div class="about-header">
+      <h3>About Dip</h3>
+      <button class="about-close" id="aboutClose" aria-label="Close about panel">&times;</button>
+    </div>
+
+    <div class="about-content" id="aboutContent">
+      <div class="about-row">
+        <div class="label">City</div>
+        <div class="value">Nagarpur, Tangail</div>
+      </div>
+
+      <div class="about-row">
+        <div class="label">Email</div>
+        <div class="value"><a href="mailto:diptarafder17@gmail.com" style="color:#9fe8ff;text-decoration:none">diptarafder17@gmail.com</a></div>
+      </div>
+
+      <div class="about-row">
+        <div class="label">Hobby</div>
+        <div class="value">Singing, games, and Taking Dreams</div>
+      </div>
+
+      <div class="about-footer">Thanks for visiting My profile</div>
+    </div>
+  </aside>
 
   <!-- Foreground stage -->
-  <div class="stage">
-    <div class="card float" id="profileCard" aria-label="Gravity profile card">
+  <div class="stage" role="main">
+    <div class="card" id="profileCard" aria-label="Gravity profile card">
+      <div class="top-clear" aria-hidden="true"></div>
+
       <div class="avatar-wrap" aria-hidden="false">
         <div class="avatar" role="img" aria-label="Profile picture of Dιρ Tαɾαϝԃҽɾ">
           <img src="https://i.ibb.co/0yNGDTV0/2034-Picsart-Ai-Image-Enhancer.jpg"
@@ -270,7 +383,7 @@
         </div>
       </div>
 
-      <div class="name">𝒟𝒾𝓅 𝒯𝒶𝓇𝒶𝒻𝒹𝑒𝓇</div>
+      <div class="name">Dιρ Tαɾαϝԃҽɾ</div>
 
       <nav class="social-bar" aria-label="Social links">
         <a class="btn whatsapp" href="https://wa.me/qr/O6ZY5GWHOZNUJ1" target="_blank" rel="noopener noreferrer">
@@ -297,54 +410,55 @@
   </div>
 
   <script>
-    // Parallax subtle movement for background band and card
     (function(){
-      const band = document.querySelector('.light-band');
-      const stage = document.querySelector('.stage');
-      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if(reduce) return;
+      const aboutBtn = document.getElementById('aboutBtn');
+      const aboutPanel = document.getElementById('aboutPanel');
+      const aboutClose = document.getElementById('aboutClose');
 
-      function onMove(e){
-        const x = (e.clientX || (e.touches && e.touches[0].clientX) || innerWidth/2) / innerWidth - 0.5;
-        const y = (e.clientY || (e.touches && e.touches[0].clientY) || innerHeight/2) / innerHeight - 0.5;
-        band.style.transform = `translate3d(${x * -8}%, ${y * -6}%, 0) rotate(-6deg)`;
-        stage.style.transform = `translate3d(${x * 8}px, ${y * 6}px, 0)`;
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function openPanel(){
+        aboutPanel.classList.add('open');
+        aboutPanel.setAttribute('aria-hidden', 'false');
+        aboutBtn.setAttribute('aria-expanded', 'true');
+        aboutClose.focus();
       }
 
-      window.addEventListener('mousemove', onMove);
-      window.addEventListener('touchmove', onMove, {passive:true});
-      window.addEventListener('mouseleave', () => {
-        band.style.transform = '';
-        stage.style.transform = '';
+      function closePanel(){
+        aboutPanel.classList.remove('open');
+        aboutPanel.setAttribute('aria-hidden', 'true');
+        aboutBtn.setAttribute('aria-expanded', 'false');
+        aboutBtn.focus();
+      }
+
+      aboutBtn.addEventListener('click', () => {
+        const isOpen = aboutPanel.classList.contains('open');
+        if(isOpen) closePanel(); else openPanel();
       });
-    })();
 
-    // Keep card tilt tactile but not affecting avatar clarity
-    (function(){
-      const card = document.getElementById('profileCard');
-      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if(reduce) return;
+      aboutClose.addEventListener('click', closePanel);
 
-      function handleMove(e){
-        const r = card.getBoundingClientRect();
-        const x = (e.clientX ?? (e.touches && e.touches[0].clientX)) - r.left;
-        const y = (e.clientY ?? (e.touches && e.touches[0].clientY)) - r.top;
-        const px = (x / r.width) - 0.5;
-        const py = (y / r.height) - 0.5;
-        const rx = (py * 8).toFixed(2);
-        const ry = (px * -8).toFixed(2);
-        card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) translateZ(6px)`;
+      // close on Escape
+      document.addEventListener('keydown', (e) => {
+        if(e.key === 'Escape' && aboutPanel.classList.contains('open')) {
+          closePanel();
+        }
+      });
+
+      // close when clicking outside the panel
+      document.addEventListener('click', (e) => {
+        if(!aboutPanel.classList.contains('open')) return;
+        const target = e.target;
+        if(!aboutPanel.contains(target) && !aboutBtn.contains(target)){
+          closePanel();
+        }
+      });
+
+      if(reduce){
+        aboutPanel.style.transition = 'none';
+        aboutBtn.style.transition = 'none';
       }
-
-      function reset(){
-        card.style.transform = '';
-      }
-
-      card.addEventListener('mousemove', handleMove);
-      card.addEventListener('touchmove', handleMove, {passive:true});
-      card.addEventListener('mouseleave', reset);
-      card.addEventListener('touchend', reset);
     })();
   </script>
 </body>
-          </html>
+</html>
