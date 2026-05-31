@@ -27,9 +27,7 @@ The background and the avatar share the same image.
 - Find the `:root` variables in the `<style>` tag and update the `--bg-image` URL:
   ```css
   :root {
-    --bg-image: url("YOUR_IMAGE_URL_HERE");
-  }here
-
+    --bg-image
 <img src="YOUR_IMAGE_URL_HERE" alt="Profile picture">
 
 <div class="name">Your Name</div>
