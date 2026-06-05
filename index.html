@@ -1,18 +1,23 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Gravity Profile — About_Dip (Upper Left)</title>
+  <title>CONTACT𖡬DIP — Contact & Payments</title>
+
+  <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
     :root{
-      --card-w: 360px;
+      --panel-w: 340px;
       --accent-1: #6be7ff;
-      --accent-2: #bc79ff;
       --bg-img: url("https://i.ibb.co/0yNGDTV0/2034-Picsart-Ai-Image-Enhancer.jpg");
-      --panel-w: 320px;
+      --gmail-red: #d93025;
+      --gmail-red-dark: #b1271b;
+      --nagad-orange: #ff6b00;
+      --glass: rgba(255,255,255,0.04);
+      --bar-bg: rgba(256,255,255,0.001);
     }
 
     *{box-sizing:border-box}
@@ -20,29 +25,27 @@
     body{
       margin:0;
       font-family: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial;
-      background: #05020a;
+      background:#05020a;
+      color:#e9f9ff;
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
       display:flex;
       align-items:center;
       justify-content:center;
-      padding:24px;
+      padding:28px;
       overflow:hidden;
     }
 
-    /* Fullscreen background image (sharp source) */
-    .bg {
+    /* Background */
+    .bg{
       position:fixed;
       inset:0;
       z-index:0;
-      pointer-events:none;
       background-image: var(--bg-img);
       background-size:cover;
       background-position:center center;
       transform: scale(1.03);
     }
-
-    /* Blur + color overlay on top of the background image */
     .bg::after{
       content:"";
       position:absolute;
@@ -50,415 +53,415 @@
       backdrop-filter: blur(14px) saturate(1.05) contrast(0.95);
       -webkit-backdrop-filter: blur(14px) saturate(1.05) contrast(0.95);
       background: linear-gradient(180deg, rgba(6,6,12,0.45), rgba(8,6,18,0.55));
-      mix-blend-mode: multiply;
+      mix-blend-mode:multiply;
       pointer-events:none;
     }
 
-    .bg::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background: radial-gradient(60% 60% at 50% 40%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.45) 100%);
-      pointer-events:none;
-    }
-
-    /* About button placed upper-left */
-    .about-btn {
+    /* About toggle (kept in front frame) */
+    .about-btn{
       position:fixed;
       left:18px;
       top:18px;
-      z-index:30;
+      z-index:9999;
       display:flex;
       align-items:center;
       gap:10px;
-      padding:10px 12px;
+      padding:10px 14px;
+      border-radius:12px;
       background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
       border:1px solid rgba(255,255,255,0.06);
       color:#fff;
-      border-radius:12px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      box-shadow: 0 12px 36px rgba(0,0,0,0.6);
       cursor:pointer;
-      user-select:none;
-      transition: transform 180ms ease, box-shadow 180ms ease, background 220ms;
       backdrop-filter: blur(6px);
     }
+    .about-btn i{
+      width:36px;
+      height:36px;
+      display:inline-grid;
+      place-items:center;
+      border-radius:10px;
+      background:var(--glass);
+      color:var(--accent-1);
+      font-size:18px;
+    }
+    .about-btn strong{ font-size:13px; display:block; line-height:1; }
+    .about-btn small{ color:#9fbfd0; font-size:11px; display:block; line-height:1; }
 
-    .about-btn:active{ transform: scale(0.98); }
-    .about-btn:hover{ transform: translateY(-2px); box-shadow: 0 18px 40px rgba(0,0,0,0.7); }
-
-    .about-btn i{ width:28px; height:28px; display:inline-grid; place-items:center; border-radius:8px; background:rgba(255,255,255,0.03); color:var(--accent-1); }
-
-    /* Slide-in about panel */
-    .about-panel {
+    /* Slide-in panel */
+    .about-panel{
       position:fixed;
-      left: -1px;
+      left:-1px;
       top:0;
       bottom:0;
       width:var(--panel-w);
       max-width:92vw;
       transform: translateX(calc(-100% - 8px));
-      z-index:28;
+      z-index:9998;
       background: linear-gradient(180deg, rgba(12,10,18,0.98), rgba(8,6,18,0.96));
-      border-right: 1px solid rgba(255,255,255,0.04);
+      border-right:1px solid rgba(255,255,255,0.04);
       box-shadow: 8px 0 40px rgba(0,0,0,0.6);
       padding:22px;
       display:flex;
       flex-direction:column;
-      gap:18px;
+      gap:16px;
       transition: transform 360ms cubic-bezier(.2,.9,.3,1);
-      will-change: transform;
       overflow:auto;
     }
+    .about-panel.open{ transform: translateX(0); }
 
-    .about-panel.open { transform: translateX(0); }
-
-    .about-header{
-      display:flex;
-      align-items:center;
-      gap:12px;
-    }
-
-    .about-header h3{
-      margin:0;
-      color:#fff;
-      font-size:1.05rem;
-      letter-spacing:1px;
-      font-weight:600;
-    }
-
-    .about-close{
-      margin-left:auto;
+    /* Close control inside panel */
+    .panel-close{
+      position:absolute;
+      right:10px;
+      top:10px;
       background:transparent;
       border:none;
-      color:rgba(255,255,255,0.7);
-      font-size:1.1rem;
+      color:#cfefff;
+      font-size:18px;
       cursor:pointer;
       padding:6px;
       border-radius:8px;
     }
-    .about-close:hover{ background: rgba(255,255,255,0.02); }
+    .panel-close:hover{ background:rgba(255,255,255,0.02); }
 
-    .about-content{
-      color:rgba(255,255,255,0.9);
-      font-size:0.95rem;
-      line-height:1.5;
-    }
-
-    .about-row{
+    /* Profile */
+    .profile-wrap{
       display:flex;
-      gap:10px;
-      align-items:flex-start;
-      padding:12px;
-      border-radius:10px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
-      border:1px solid rgba(255,255,255,0.02);
+      gap:12px;
+      align-items:center;
+      padding-bottom:8px;
+      border-bottom:1px solid rgba(255,255,255,0.03);
     }
-
-    .label{
+    .profile-holder{
+      width:84px;
+      height:84px;
       min-width:84px;
-      color:rgba(255,255,255,0.65);
-      font-weight:700;
-      font-size:0.85rem;
-    }
-
-    .value{
-      color:#fff;
-      font-weight:600;
-      font-size:0.95rem;
-      word-break:break-word;
-    }
-
-    /* Foreground stage */
-    .stage{
-      position:relative;
-      z-index:10;
-      width:100%;
-      max-width:1200px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      perspective:1200px;
-    }
-
-    /* Card */
-    .card{
-      width:var(--card-w);
-      border-radius:28px;
-      padding:28px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border:1px solid rgba(255,255,255,0.04);
-      box-shadow:
-        0 30px 60px rgba(2,6,23,0.6),
-        0 6px 18px rgba(0,0,0,0.6);
-      position:relative;
-      transform-style:preserve-3d;
-      transition:transform 400ms cubic-bezier(.2,.9,.3,1), box-shadow 300ms;
-      overflow:visible;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-    }
-
-    .card:hover{
-      transform: translateY(-6px) scale(1.01);
-      box-shadow: 0 40px 90px rgba(2,6,23,0.75);
-    }
-
-    .top-clear { height:8px; width:100%; pointer-events:none; }
-
-    .avatar-wrap{
-      width:140px;
-      height:140px;
       border-radius:50%;
-      padding:6px;
-      background: linear-gradient(180deg, rgba(107,231,255,0.08), rgba(188,121,255,0.06));
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      box-shadow: 0 14px 36px rgba(0,0,0,0.6), inset 0 2px 8px rgba(255,255,255,0.02);
-      margin-top:6px;
-      position:relative;
-      z-index:12;
-    }
-
-    .avatar{
-      width:100%;
-      height:100%;
-      border-radius:50%;
+      padding:4px;
+      background: linear-gradient(135deg, rgba(107,231,255,0.12), rgba(188,121,255,0.08));
+      display:grid;
+      place-items:center;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+      border:1px solid rgba(255,255,255,0.06);
       overflow:hidden;
-      display:block;
-      background:linear-gradient(180deg,#222,#111);
-      border: 3px solid rgba(255,255,255,0.04);
+      z-index:10000;
     }
+    .profile-holder img{ width:100%; height:100%; object-fit:cover; border-radius:50%; display:block; }
+    .profile-meta{ display:flex; flex-direction:column; gap:6px; }
+    .profile-meta .name{ font-weight:700; font-size:15px; color:#e9f9ff; }
+    .profile-meta .sub{ color:#9fbfd0; font-size:13px; }
 
-    .avatar img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-      -webkit-user-drag: none;
-      user-select: none;
-      transform-origin:center;
-      transition: transform 300ms ease;
-      filter: none;
-    }
+    /* Rows */
+    .about-row{ display:flex; align-items:center; gap:12px; justify-content:space-between; font-size:14px; color:#cfefff; }
+    .about-row .label{ color:#9fbfd0; font-weight:600; min-width:64px; }
+    .about-row .value{ display:flex; align-items:center; gap:8px; justify-content:flex-end; color:#9fbfd0; }
 
-    .name{
-      margin-top:6px;
+    .email-link{ color:#9fe8ff; text-decoration:none; font-weight:600; display:inline-flex; gap:8px; align-items:center; }
+
+    /* Buttons */
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
       color:#fff;
-      font-weight:600;
-      letter-spacing:1.5px;
-      font-size:1rem;
-      text-transform:uppercase;
-      z-index:12;
+      text-decoration:none;
+      font-weight:700;
+      font-size:13px;
+      border:none;
+      cursor:pointer;
     }
+    .btn .fa-fw{ width:18px; text-align:center; }
 
-    .social-bar{
+    .btn-mail{ background: linear-gradient(180deg, var(--gmail-red), var(--gmail-red-dark)); box-shadow: 0 8px 20px rgba(217,48,37,0.18); }
+    .btn-google{ background: linear-gradient(180deg,#1a73e8,#1558b0); box-shadow: 0 8px 20px rgba(26,115,232,0.12); }
+    .btn-nagad{ background: linear-gradient(180deg,var(--nagad-orange),#c84a00); box-shadow: 0 8px 20px rgba(255,107,0,0.12); }
+
+    /* Social bars (full-width link bars) */
+    .social-bars{
       display:flex;
       flex-direction:column;
-      gap:10px;
-      margin-top:8px;
-      width:100%;
-      z-index:12;
+      gap:8px;
+      margin-top:6px;
     }
-
-    .btn{
+    .social-bar{
       display:flex;
       align-items:center;
       gap:12px;
-      padding:12px 14px;
-      border-radius:12px;
+      padding:10px 12px;
+      border-radius:10px;
+      background:var(--bar-bg);
+      color:#e9f9ff;
       text-decoration:none;
-      color:#fff;
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border:1px solid rgba(255,255,255,0.04);
-      transition: transform 160ms ease, box-shadow 160ms ease, background 220ms;
-      font-weight:600;
-      font-size:0.95rem;
-      justify-content:flex-start;
-      box-shadow: 0 6px 18px rgba(2,6,23,0.45);
-    }
-
-    .btn i{
-      width:34px;
-      height:34px;
-      display:inline-grid;
-      place-items:center;
-      border-radius:8px;
-      background:rgba(255,255,255,0.03);
-      color:var(--accent-1);
-      font-size:1rem;
-      flex-shrink:0;
-    }
-
-    .btn:hover{ transform: translateY(-3px); background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)); }
-    .btn:active{ transform: scale(0.98); background: linear-gradient(180deg, var(--accent-2), var(--accent-1)); color:#0b0712; }
-
-    .contact-pill{
-      display:inline-flex;
-      gap:10px;
-      align-items:center;
-      margin-top:6px;
-      padding:10px 18px;
-      border-radius:999px;
-      background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      color:rgba(255,255,255,0.75);
-      font-size:0.9rem;
       border:1px solid rgba(255,255,255,0.03);
-      box-shadow: 0 6px 18px rgba(2,6,23,0.45);
-      z-index:12;
+      transition:transform .12s ease, box-shadow .12s ease;
+      font-weight:700;
+      font-size:14px;
+    }
+    .social-bar i{ width:22px; text-align:center; font-size:16px; }
+    .social-bar:hover{ transform:translateY(-4px); box-shadow:0 10px 26px rgba(0,0,0,0.45); }
+
+    .social-bar.github{ background: linear-gradient(180deg,#111,#222); color:#fff; }
+    .social-bar.linkedin{ background: linear-gradient(180deg, rgba(10,102,194,0.06), rgba(10,102,194,0.03)); color:#0a66c2; }
+    .social-bar.facebook{ background: linear-gradient(180deg, rgba(59,89,152,0.06), rgba(59,89,152,0.03)); color:#3b5998; }
+    .social-bar.instagram{ background: linear-gradient(180deg, rgba(225,48,108,0.06), rgba(225,48,108,0.03)); color:#e1306c; }
+
+    /* Payments block */
+    .payments{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      padding-top:6px;
+      border-top:1px solid rgba(255,255,255,0.03);
+    }
+    .payments .hint{ color:#9fbfd0; font-size:13px; }
+
+    /* Square scanner holder (white square with rounded corners) */
+    .scanner-square{
+      width:220px;
+      height:220px;
+      margin:8px auto;
+      background:#fff;
+      border-radius:12px;
+      padding:10px;
+      display:grid;
+      place-items:center;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+      overflow:hidden;
+    }
+    .scanner-square img{ width:100%; height:100%; object-fit:contain; border-radius:8px; }
+
+    .masked{ color:#dbefff; font-weight:700; font-size:13px; }
+
+    /* Contact number */
+    .contact-number{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:#9fbfd0;
+      font-weight:700;
+      font-size:14px;
+      margin-top:6px;
     }
 
-    .about-footer{
-      margin-top:auto;
-      font-size:0.85rem;
-      color:rgba(255,255,255,0.6);
+    /* Center card placeholder */
+    .center-card{
+      width:360px;
+      max-width:92vw;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:14px;
+      padding:28px;
+      z-index:10;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.7);
+      border:1px solid rgba(255,255,255,0.03);
       text-align:center;
-      padding-top:8px;
     }
+    .center-card h1{ margin:0 0 8px 0; font-size:20px; color:#e9f9ff; }
+    .center-card p{ margin:0; color:#9fbfd0; font-size:13px; }
 
     /* Responsive */
-    @media (max-width:880px){
-      .about-btn{ left:12px; top:12px; padding:8px 10px; }
-      .about-panel{ width:92vw; }
-      .card{ width:92vw; max-width:420px; }
-    }
-
-    @media (prefers-reduced-motion: reduce){
-      .about-panel, .about-btn, .card{ transition:none; }
-      .bg::after{ -webkit-backdrop-filter:none; backdrop-filter:none; filter:none; }
+    @media (max-width:420px){
+      .profile-holder{ width:64px; height:64px; min-width:64px; }
+      .about-panel{ padding:16px; width:92vw; }
+      .scanner-square{ width:180px; height:180px; }
+      .social-bar{ font-size:13px; padding:10px; }
     }
   </style>
 </head>
 <body>
-  <!-- Background image (full-screen) with blur/color overlay applied via pseudo-element -->
   <div class="bg" aria-hidden="true"></div>
 
-  <!-- About button now positioned upper-left -->
-  <button class="about-btn" id="aboutBtn" aria-expanded="false" aria-controls="aboutPanel" title="About_Dip">
-    <i class="fas fa-user" aria-hidden="true"></i>
-    <span style="font-weight:700;letter-spacing:0.6px">About_Dip</span>
+  <!-- About toggle (front frame icon kept visible) -->
+  <button id="aboutToggle" class="about-btn" aria-expanded="false" aria-controls="aboutPanel">
+    <i aria-hidden="true"><span class="fa-solid fa-circle-user"></span></i>
+    <div style="display:flex;flex-direction:column;align-items:flex-start;line-height:1;">
+      <strong> ░ＣＯＮＴＡＣＴ</strong>
+      <small> <br>❕informmations are here⏎</small>
+    </div>
   </button>
 
-  <!-- Slide-in About panel -->
-  <aside class="about-panel" id="aboutPanel" role="region" aria-label="About Dip information" aria-hidden="true">
-    <div class="about-header">
-      <h3>About Dip</h3>
-      <button class="about-close" id="aboutClose" aria-label="Close about panel">&times;</button>
+  <!-- Slide-in about panel -->
+  <aside id="aboutPanel" class="about-panel" role="region" aria-label="About panel">
+    <!-- Close button inside panel (restores About button when used) -->
+    <button id="panelClose" class="panel-close" aria-label="Close panel">
+      <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+    </button>
+
+    <!-- Profile -->
+    <div class="profile-wrap">
+      <div class="profile-holder" role="img" aria-label="Profile picture of Dip">
+        <img src="https://i.postimg.cc/1ttLkCZL/kmc-20260603-061347.png" alt="Dip profile picture">
+      </div>
+      <div class="profile-meta">
+        <div class="name">DIP TARAFDER</div>
+        <div class="sub">𓂊ʟɪɢʜᴛ𖡬ʀᴏᴀᴅ⇝ʀɪᴅᴇ́͠<br>Hyper Frontend Developer — Dhaka, Bangladesh</div>
+        <div style="color:#9fbfd0;font-size:13px">Age 21+<br>--ꚰNagarpur, Tangail</div>
+      </div>
     </div>
 
-    <div class="about-content" id="aboutContent">
-      <div class="about-row">
-        <div class="label">City</div>
-        <div class="value">Nagarpur, Tangail</div>
+    <!-- Contact row with email and mail button -->
+    <div class="about-row" aria-label="Email row">
+      <div class="label">Mail</div>
+      <div class="value">
+        <a class="email-link" href="mailto:diptarafder17@gmail.com" aria-label="Send email to Dip">
+          <i class="fa-regular fa-envelope fa-fw" aria-hidden="true"></i>
+          diptarafder17@gmail.com
+        </a>
+
+        <!-- Email button in about section -->
+        <a class="btn btn-mail" href="mailto:diptarafder17@gmail.com" aria-label="Compose email to Dip">
+          <i class="fa-solid fa-paper-plane fa-fw" aria-hidden="true"></i>
+          <span>Mail</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Contact number -->
+    <div class="about-row" aria-label="Phone row">
+      <div class="label">Phone</div>
+      <div class="value contact-number">
+        <i class="fa-solid fa-phone" aria-hidden="true"></i>
+        <span>+8801761613854</span>
+      </div>
+    </div>
+
+    <!-- Social bars (direct links shown as bars) -->
+    <div>
+      <div style="color:#9fbfd0;font-weight:600;margin-bottom:8px">Connect</div>
+      <div class="social-bars" role="list" aria-label="Social links as bars">
+        <a class="social-bar github" role="listitem"
+           href="https://github.com/diptarafder17-prog"
+           target="_blank" rel="noopener noreferrer"
+           aria-label="GitHub profile" title="GitHub">
+          <i class="fa-brands fa-github" aria-hidden="true"></i>
+          <span>GitHub</span>
+        </a>
+
+        <a class="social-bar linkedin" role="listitem"
+           href="https://www.linkedin.com/me?trk=p_mwlite_profile_view-secondary_nav"
+           target="_blank" rel="noopener noreferrer"
+           aria-label="LinkedIn profile" title="LinkedIn">
+          <i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>
+          <span>LinkedIn</span>
+        </a>
+
+        <a class="social-bar facebook" role="listitem"
+           href="https://www.facebook.com/share/1CWxsPp1KB/"
+           target="_blank" rel="noopener noreferrer"
+           aria-label="Facebook profile" title="Facebook">
+          <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
+          <span>Facebook</span>
+        </a>
+
+        <a class="social-bar instagram" role="listitem"
+           href="https://www.instagram.com/diptarafderr?igsh=MWd3c3N2bjZzZGFrbw=="
+           target="_blank" rel="noopener noreferrer"
+           aria-label="Instagram profile" title="Instagram">
+          <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+          <span>Instagram</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Payments -->
+    <div class="payments" aria-label="Payments">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <div style="color:#9fbfd0;font-weight:600">Payments</div>
+        <div class="hint" style="font-size:12px;color:#9fbfd0">Secure options</div>
       </div>
 
-      <div class="about-row">
-        <div class="label">Email</div>
-        <div class="value"><a href="mailto:diptarafder17@gmail.com" style="color:#9fe8ff;text-decoration:none">diptarafder17@gmail.com</a></div>
+      <!-- Google Pay / Card (masked) -->
+      <div style="display:flex;flex-direction:column;gap:8px;align-items:center;">
+        <div class="masked">Visa •••• 9656</div>
+        <a class="btn btn-google" href="#" role="button" aria-label="Pay with Google Pay (placeholder)">
+          <i class="fa-brands fa-google fa-fw" aria-hidden="true"></i>
+          <span>Pay with Google Pay</span>
+        </a>
       </div>
 
-      <div class="about-row">
-        <div class="label">Hobby</div>
-        <div class="value">Singing, games, and Taking Dreams</div>
+      <!-- Nagad (scanner square holder using provided image) -->
+      <div style="display:flex;flex-direction:column;gap:8px;align-items:center;">
+        <div class="masked">Nagad •••• 4861</div>
+
+        <!-- Square scanner holder -->
+        <div class="scanner-square" aria-hidden="false" title="Nagad QR scanner">
+          <img src="https://i.postimg.cc/90NyQBz7/Payment-scanner-jpg-(1).png" alt="Nagad QR scanner">
+        </div>
+
+        <a class="btn btn-nagad" href="https://q.me-qr.com/mv1a5vc6" target="_blank" rel="noopener noreferrer" aria-label="Open Nagad payment">
+          <i class="fa-solid fa-mobile-screen-button fa-fw" aria-hidden="true"></i>
+          <span>@Nagad/8801731544861</span>
+        </a>
+
+        <div style="font-size:12px;color:#9fbfd0">Tip: scan the square QR above or tap to open Nagad checkout</div>
       </div>
 
-      <div class="about-footer">Thanks for visiting My profile</div>
+      <div style="font-size:12px;color:#9fbfd0;padding-top:6px">Security note: Full card and account numbers are never shown. Payments should use secure gateways and tokenization.</div>
+    </div>
+
+    <!-- Additional info -->
+    <div style="margin-top:6px;color:#9fbfd0;font-size:13px;line-height:1.45">
+      <strong style="color:#e9f9ff">▓▒▒ＣＯＮＴＡＣＴ░░░</strong>
+      <p style="margin:8px 0 0 0;color:#9fbfd0;font-size:13px">Dip Tarafder Official @2026</p>
     </div>
   </aside>
 
-  <!-- Foreground stage -->
-  <div class="stage" role="main">
-    <div class="card" id="profileCard" aria-label="Gravity profile card">
-      <div class="top-clear" aria-hidden="true"></div>
-
-      <div class="avatar-wrap" aria-hidden="false">
-        <div class="avatar" role="img" aria-label="Profile picture of Dιρ Tαɾαϝԃҽɾ">
-          <img src="https://i.ibb.co/0yNGDTV0/2034-Picsart-Ai-Image-Enhancer.jpg"
-               alt="Profile picture"
-               onerror="this.onerror=null; this.src='https://i.ibb.co/0yNGDTV0/2034-Picsart-Ai-Image-Enhancer.jpg';"
-               draggable="false">
-        </div>
-      </div>
-
-      <div class="name">Dιρ Tαɾαϝԃҽɾ</div>
-
-      <nav class="social-bar" aria-label="Social links">
-        <a class="btn whatsapp" href="https://wa.me/qr/O6ZY5GWHOZNUJ1" target="_blank" rel="noopener noreferrer">
-          <i class="fab fa-whatsapp" aria-hidden="true"></i>
-          <span>WhatsApp</span>
-        </a>
-
-        <a class="btn instagram" href="https://www.instagram.com/diptarafderr?igsh=MWd3c3N2bjZzZGFrbw==" target="_blank" rel="noopener noreferrer">
-          <i class="fab fa-instagram" aria-hidden="true"></i>
-          <span>Instagram</span>
-        </a>
-
-        <a class="btn facebook" href="https://www.facebook.com/share/19E3s37ifs/" target="_blank" rel="noopener noreferrer">
-          <i class="fab fa-facebook-f" aria-hidden="true"></i>
-          <span>Facebook</span>
-        </a>
-      </nav>
-
-      <div class="contact-pill" aria-label="Phone number">
-        <i class="fas fa-phone" style="color:var(--accent-1)"></i>
-        <span style="font-weight:600;color:#fff">01761613854</span>
-      </div>
-    </div>
-  </div>
+  <!-- Center content -->
+  <main class="center-card" role="main" aria-label="Main content">
+    <h1>◀︎🄳🄸🄿🅃🄰🅁🄰🄵🄳🄴🅁▶︎</h1>
+    <p>Desiner // Gamer // Musician</p>
+  </main>
 
   <script>
     (function(){
-      const aboutBtn = document.getElementById('aboutBtn');
-      const aboutPanel = document.getElementById('aboutPanel');
-      const aboutClose = document.getElementById('aboutClose');
-
-      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const toggle = document.getElementById('aboutToggle');
+      const panel = document.getElementById('aboutPanel');
+      const closeBtn = document.getElementById('panelClose');
 
       function openPanel(){
-        aboutPanel.classList.add('open');
-        aboutPanel.setAttribute('aria-hidden', 'false');
-        aboutBtn.setAttribute('aria-expanded', 'true');
-        aboutClose.focus();
+        panel.classList.add('open');
+        toggle.setAttribute('aria-expanded','true');
+        // vanish the about button after click
+        toggle.style.display = 'none';
       }
 
       function closePanel(){
-        aboutPanel.classList.remove('open');
-        aboutPanel.setAttribute('aria-hidden', 'true');
-        aboutBtn.setAttribute('aria-expanded', 'false');
-        aboutBtn.focus();
+        panel.classList.remove('open');
+        toggle.setAttribute('aria-expanded','false');
+        // restore the about button when panel is closed via close control
+        toggle.style.display = '';
       }
 
-      aboutBtn.addEventListener('click', () => {
-        const isOpen = aboutPanel.classList.contains('open');
-        if(isOpen) closePanel(); else openPanel();
-      });
-
-      aboutClose.addEventListener('click', closePanel);
-
-      // close on Escape
-      document.addEventListener('keydown', (e) => {
-        if(e.key === 'Escape' && aboutPanel.classList.contains('open')) {
-          closePanel();
+      // Toggle opens panel and hides the about button
+      toggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if(panel.classList.contains('open')) {
+          closeBtn.click();
+        } else {
+          openPanel();
         }
       });
 
-      // close when clicking outside the panel
+      // Close button inside panel restores the about button
+      closeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        closePanel();
+      });
+
+      // Close when clicking outside the panel — also restore about button
       document.addEventListener('click', (e) => {
-        if(!aboutPanel.classList.contains('open')) return;
-        const target = e.target;
-        if(!aboutPanel.contains(target) && !aboutBtn.contains(target)){
-          closePanel();
-        }
+        if(!panel.classList.contains('open')) return;
+        const inside = panel.contains(e.target) || toggle.contains(e.target);
+        if(!inside) closePanel();
       });
 
-      if(reduce){
-        aboutPanel.style.transition = 'none';
-        aboutBtn.style.transition = 'none';
-      }
+      // Esc to close and restore about button
+      document.addEventListener('keydown', (e) => {
+        if(e.key === 'Escape' && panel.classList.contains('open')) closePanel();
+      });
     })();
   </script>
 </body>
-</html>
+  </html>
