@@ -1,37 +1,211 @@
-# Gravity Profile — Blurred Photo Background
+🌌 Gravity Profile — Blurred Photo Background
 
-A sleek, modern, and interactive personal profile landing page (Linktree alternative). It features a glassmorphism design, interactive 3D card tilt effects, and a beautiful dynamic blurred background that adapts to your profile picture.
+A sleek, modern, and interactive personal profile landing page inspired by Linktree. Built with pure HTML, CSS, and Vanilla JavaScript, Gravity Profile features stunning glassmorphism effects, interactive 3D animations, and a dynamic blurred background generated from your profile picture.
 
-## ✨ Features
+---
 
-- **Glassmorphism UI**: Beautiful frosted-glass effects using modern CSS backdrop filters.
-- **Dynamic Blurred Background**: The background automatically uses your profile picture and applies a smooth blur, color wash, and moving light band to bring it to life.
-- **Interactive 3D Hover Effects**: The card smoothly tilts and follows your mouse or touch movements using Vanilla JavaScript.
-- **Subtle Parallax**: The background and stage shift slightly as you move your cursor, creating a deep sense of gravity.
-- **Fully Responsive**: Adapts perfectly to mobile phones, tablets, and desktop screens.
-- **Accessibility Friendly**: Includes support for `prefers-reduced-motion` to disable animations for users who prefer static interfaces, along with proper `aria-labels`.
-- **Zero Dependencies**: Built with pure HTML, CSS, and Vanilla JavaScript (uses FontAwesome for icons).
+✨ Features
 
-## 🚀 How to Use
+🪟 Glassmorphism UI
 
-1. Download or clone this repository.
-2. Ensure you have the `index.html` file on your computer.
-3. Simply double-click the `index.html` file to open it in your favorite web browser! No server or build tools required.
+Beautiful frosted-glass card design using modern CSS backdrop filters and transparency effects.
 
-## 🎨 Customization
+🌄 Dynamic Blurred Background
 
-You can easily customize this profile card to make it your own by editing the `index.html` file.
+Your profile image automatically becomes the page background with:
 
-### 1. Change the Profile Picture & Background
-The background and the avatar share the same image. 
-- Find the `:root` variables in the `<style>` tag and update the `--bg-image` URL:
-  ```css
-  :root {
-    --bg-image
+- Smooth blur effect
+- Color wash overlay
+- Animated light band
+- Soft glowing atmosphere
+
+🎯 Interactive 3D Hover Effects
+
+The profile card reacts to mouse and touch movements with realistic tilt animations.
+
+🌍 Subtle Parallax Motion
+
+Background layers move slightly with cursor movement, creating a sense of depth and gravity.
+
+📱 Fully Responsive
+
+Optimized for:
+
+- Mobile Phones
+- Tablets
+- Laptops
+- Desktop Screens
+
+♿ Accessibility Friendly
+
+Includes:
+
+- "prefers-reduced-motion" support
+- Keyboard accessibility
+- Proper "aria-label" attributes
+
+⚡ Zero Dependencies
+
+No frameworks required.
+
+Built using:
+
+- HTML5
+- CSS3
+- Vanilla JavaScript
+- Font Awesome Icons
+
+---
+
+🚀 Installation
+
+Method 1: Download
+
+1. Download the repository.
+2. Extract the files.
+3. Open "index.html" in any modern browser.
+
+Method 2: Git Clone
+
+git clone https://github.com/yourusername/gravity-profile.git
+cd gravity-profile
+
+Then simply open:
+
+index.html
+
+No server setup required.
+
+---
+
+📂 Project Structure
+
+gravity-profile/
+│
+├── index.html
+├── README.md
+└── assets/
+    └── profile.jpg
+
+---
+
+🎨 Customization
+
+Change Profile Picture
+
+Locate the CSS root variables:
+
+:root {
+  --bg-image: url("YOUR_IMAGE_URL_HERE");
+}
+
+Replace with your own image URL:
+
+:root {
+  --bg-image: url("https://example.com/profile.jpg");
+}
+
+---
+
+Change Avatar
+
+Find:
+
 <img src="YOUR_IMAGE_URL_HERE" alt="Profile picture">
 
+Replace with your image:
+
+<img src="profile.jpg" alt="Dip Tarafder">
+
+---
+
+Change Name
+
+Find:
+
 <div class="name">Your Name</div>
-<a class="btn whatsapp" href="YOUR_WHATSAPP_LINK">...</a>
-<a class="btn instagram" href="YOUR_INSTAGRAM_LINK">...</a>
-<a class="btn facebook" href="YOUR_FACEBOOK_LINK">...</a>
-<span>+1 234 567 8900</span>
+
+Replace:
+
+<div class="name">Dip Tarafder</div>
+
+---
+
+Add Social Links
+
+WhatsApp
+
+<a class="btn whatsapp"
+   href="https://wa.me/8801234567890">
+   WhatsApp
+</a>
+
+Instagram
+
+<a class="btn instagram"
+   href="https://instagram.com/yourusername">
+   Instagram
+</a>
+
+Facebook
+
+<a class="btn facebook"
+   href="https://facebook.com/yourprofile">
+   Facebook
+</a>
+
+---
+
+🛠 Technologies Used
+
+Technology| Purpose
+HTML5| Structure
+CSS3| Styling
+JavaScript| Interactivity
+Font Awesome| Icons
+Backdrop Filter| Glassmorphism
+CSS Variables| Easy Customization
+
+---
+
+📸 Preview
+
+Features include:
+
+- Dynamic blurred photo background
+- Interactive 3D profile card
+- Floating animations
+- Responsive layout
+- Social media buttons
+- Modern UI aesthetics
+
+---
+
+🌟 Future Enhancements
+
+- Dark / Light Theme Toggle
+- Spotify Integration
+- Discord Presence Widget
+- Visitor Counter
+- Custom Background Videos
+- Theme Customizer
+
+---
+
+📄 License
+
+This project is licensed under the MIT License.
+
+Feel free to use, modify, and distribute.
+
+---
+
+👨‍💻 Author
+
+Dip Tarafder
+
+- Developer
+- Designer
+- Content Creator
+
+Made with ❤️ using HTML, CSS & JavaScript.
