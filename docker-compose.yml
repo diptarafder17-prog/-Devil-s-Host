@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  # FastAPI Backend Service
+  devil-api:
+    image: python:3.11-slim
+    container_name: devil-api-backend
+    working_dir: /app
+    volumes:
+      - ../devil-api:/app
+      - /var/run/devil2.sock:/var/run/devil2.sock # Bind-mount local UNIX socket
+    ports:
+      - "8000:8000"
+    environment:
+      - DEVIL_API_KEY=super_secure_token_abc123
+      - CORS_ORIGINS=http://localhost:5173
+    command: uvicorn main:app --host 0.0.0.0 --port 8000
+
+  # SvelteKit Frontend Service
+  devil-web:
+    image: node:20-slim
+    container_name: devil-web-frontend
+    working_dir: /app
+    volumes:
+      - .:/app
+    ports:
+      - "5173:5173"
+    environment:
+      - PRIVATE_DEVIL_API_URL=http://devil-api:8000
+      - PRIVATE_DEVIL_API_KEY=super_secure_token_abc123
+    depends_on:
+      - devil-api
+    command: sh -c "npm install && npm run build && node build"
+      docker-compose up -d --build
+
