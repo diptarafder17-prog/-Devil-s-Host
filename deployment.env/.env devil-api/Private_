@@ -7,3 +7,5 @@ PRIVATE_DEVIL_API_KEY="your_secure_api_key_here"
 
 # Optional: Set to "true" if you are developing locally without SSL/HTTPS
 ALLOW_INSECURE_BACKEND="true"
+# Inside your devil-api .env file
+CORS_ORIGINS="http://localhost:5173,https://your-frontend-domain.com"
