@@ -1,0 +1,55 @@
+{ "response": "html\n<!doctype html>\n<html lang='en'>\n<head>\n <meta
+charset='utf-8' />\n <meta name='viewport'
+content='width=device-width,initial-scale=1' />\n <title>DEVIL'S HOST — Dip
+Tarafder</title>\n <link rel='stylesheet'
+href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'>\n
+<link rel='stylesheet' href='styles.css'>\n</head>\n<body>\n\n <!-- Interactive
+Backdrop Particles -->\n <canvas id='networkCanvas'></canvas>\n\n <!-- Hidden
+Media Stream Player -->\n <div id='audio-player'></div>\n\n <!-- Side Drawer
+Control -->\n <button id='drawerToggle' class='system-btn' aria-expanded='false'
+aria-controls='sideDrawer'>\n <i class='fa-solid fa-server'></i>\n <div>\n
+<strong>SYSTEM DATA</strong>\n <small>Payments & Scanners</small>\n </div>\n
+</button>\n\n <!-- Side Drawer Panel -->\n <aside id='sideDrawer'
+class='side-drawer'>\n <button id='drawerClose' class='close-btn'
+aria-label='Close drawer'>&times;</button>\n \n <div class='drawer-header'>\n
+<img src='https://i.postimg.cc/1ttLkCZL/kmc-20260603-061347.png' alt='Dip
+avatar'>\n <div>\n <h3>SYSTEM ADMINISTRATOR</h3>\n <p>Dip Tarafder</p>\n
+</div>\n </div>\n\n <div class='system-gateways'>\n <h4>SECURE DEPOSITS</h4>\n
+\n <div class='deposit-row'>\n <span class='masked'>Visa •••• 9656</span>\n <a
+href='#' class='btn btn-google'><i class='fa-brands fa-google'></i> GPay</a>\n
+</div>\n\n <div class='deposit-row'>\n <span class='masked'>Nagad
+•••• 4861</span>\n <div class='qr-box'>\n <img
+src='https://i.postimg.cc/wMvRw7VF/Scanners-for-NGD.png' alt='Nagad QR'>\n
+</div>\n <a href='https://q.me-qr.com/y41t1tth' target='_blank' rel='noopener'
+class='btn btn-nagad'>\n <i class='fa-solid fa-mobile-screen'></i> Nagad
+Direct\n </a>\n </div>\n </div>\n </aside>\n\n <!-- Main Interactive Card
+Workspace -->\n <main class='workspace-card' id='mainWorkspace'>\n <div
+class='status-dot-holder'>\n <span class='pulse-dot'></span> HOST CONNECTION:
+SECURE\n </div>\n\n <div class='profile-header'>\n <img class='avatar'
+src='https://i.postimg.cc/1ttLkCZL/kmc-20260603-061347.png' alt='Dip'>\n <h2>DIP
+TARAFDER</h2>\n <p class='tagline'>Frontend Engr // Gamer // Music
+Enthusiast</p>\n \n <a href='tel:+8801761613854' class='badge-link'>\n <i
+class='fa-solid fa-phone'></i> +8801761613854\n </a>\n </div>\n\n <!-- Terminal
+Command Line Component -->\n <div class='terminal-wrapper'>\n <div
+class='terminal-bar'>\n <span class='t-btn r'></span><span class='t-btn
+y'></span><span class='t-btn g'></span>\n <span
+class='terminal-title'>guest@devils-host:~</span>\n </div>\n <div
+class='terminal-body' id='terminalBody'>\n <div class='terminal-line'>Type <span
+class='highlight'>help</span> to view active host console routines.</div>\n
+</div>\n <div class='terminal-input-row'>\n <span
+class='terminal-prompt'>$</span>\n <input type='text' id='terminalInput'
+autofocus autocomplete='off' placeholder='Enter system query...'>\n </div>\n
+</div>\n\n <!-- Front Frame Social Channels -->\n <div class='social-grid'>\n <a
+href='https://www.facebook.com/share/1CWxsPp1KB/' class='social-node fb'
+target='_blank' rel='noopener' title='Facebook'>\n <i class='fa-brands
+fa-facebook-f'></i>\n </a>\n <a
+href='https://www.linkedin.com/me?trk=p_mwlite_profile_view-secondary_nav'
+class='social-node li' target='_blank' rel='noopener' title='LinkedIn'>\n <i
+class='fa-brands fa-linkedin-in'></i>\n </a>\n <a
+href='https://www.instagram.com/diptarafderr?igsh=MWd3c3N2bjZzZGFrbw=='
+class='social-node ig' target='_blank' rel='noopener' title='Instagram'>\n <i
+class='fa-brands fa-instagram'></i>\n </a>\n <a
+href='https://wa.me/8801761613854' class='social-node wa' target='_blank'
+rel='noopener' title='WhatsApp'>\n <i class='fa-brands fa-whatsapp'></i>\n
+</a>\n </div>\n </main>\n\n <script src='app.js'></script>\n</body>\n</html>\n"
+}
