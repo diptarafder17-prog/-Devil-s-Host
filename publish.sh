@@ -53,3 +53,5 @@ npm run build
 # --- 4. EXECUTION / PUBLISH ---
 echo "✨ Build complete! Launching process supervisors..."
 echo "To publish live, map ports $BACKEND_PORT (API) and $FRONTEND_PORT (UI) via reverse proxy (Nginx)."
+chmod +x publish.sh
+./publish.sh
