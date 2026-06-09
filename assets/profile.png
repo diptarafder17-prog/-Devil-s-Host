@@ -1,0 +1,6 @@
+:root {
+--bg-image: url("[1780949883702.png](https://i.postimg.cc/65m2f6sz/1780949883702.png)](https://postimg.cc/3d2xKTxD)");
+}
+Replace with your own image URL:
+:root {
+--bg-image: url("https://i.postimg.cc/65m2f6sz/1780949883702.png");
