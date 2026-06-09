@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>CONTACT𖡬DIP — Contact & Payments</title>
 
-  <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
     :root{
       --panel-w: 340px;
       --accent-1: #6be7ff;
-      --bg-img: url("https://i.ibb.co/0yNGDTV0/2034-Picsart-Ai-Image-Enhancer.jpg");
+      /* NEW BACKGROUND IMAGE LINK */
+      --bg-img: url("https://i.postimg.cc/65m2f6sz/1780949883702.png");
       --gmail-red: #d93025;
       --gmail-red-dark: #b1271b;
       --nagad-orange: #ff6b00;
@@ -36,7 +36,7 @@
       overflow:hidden;
     }
 
-    /* Background */
+    /* Background with Motion and Blur */
     .bg{
       position:fixed;
       inset:0;
@@ -44,15 +44,25 @@
       background-image: var(--bg-img);
       background-size:cover;
       background-position:center center;
-      transform: scale(1.03);
+      /* Slow cinematic zoom and pan motion */
+      animation: bgMotion 26s ease-in-out infinite;
     }
+    
+    /* Background Motion Keyframes */
+    @keyframes bgMotion {
+      0% { transform: scale(1.05) translate(0, 0); }
+      50% { transform: scale(1.12) translate(-1%, -1%); }
+      100% { transform: scale(1.05) translate(0, 0); }
+    }
+
     .bg::after{
       content:"";
       position:absolute;
       inset:0;
-      backdrop-filter: blur(14px) saturate(1.05) contrast(0.95);
-      -webkit-backdrop-filter: blur(14px) saturate(1.05) contrast(0.95);
-      background: linear-gradient(180deg, rgba(6,6,12,0.45), rgba(8,6,18,0.55));
+      /* Enhanced Soft Blur Overlay */
+      backdrop-filter: blur(16px) saturate(1.1) contrast(0.9);
+      -webkit-backdrop-filter: blur(16px) saturate(1.1) contrast(0.9);
+      background: linear-gradient(180deg, rgba(6,6,12,0.5), rgba(8,6,18,0.6));
       mix-blend-mode:multiply;
       pointer-events:none;
     }
@@ -273,7 +283,8 @@
 <body>
   <div class="bg" aria-hidden="true"></div>
 
-  <!-- About toggle (front frame icon kept visible) -->
+  <div id="audio-player" style="position:absolute; width:0; height:0; opacity:0; pointer-events:none; visibility:hidden;"></div>
+
   <button id="aboutToggle" class="about-btn" aria-expanded="false" aria-controls="aboutPanel">
     <i aria-hidden="true"><span class="fa-solid fa-circle-user"></span></i>
     <div style="display:flex;flex-direction:column;align-items:flex-start;line-height:1;">
@@ -282,14 +293,11 @@
     </div>
   </button>
 
-  <!-- Slide-in about panel -->
   <aside id="aboutPanel" class="about-panel" role="region" aria-label="About panel">
-    <!-- Close button inside panel (restores About button when used) -->
     <button id="panelClose" class="panel-close" aria-label="Close panel">
       <i class="fa-solid fa-xmark" aria-hidden="true"></i>
     </button>
 
-    <!-- Profile -->
     <div class="profile-wrap">
       <div class="profile-holder" role="img" aria-label="Profile picture of Dip">
         <img src="https://i.postimg.cc/1ttLkCZL/kmc-20260603-061347.png" alt="Dip profile picture">
@@ -301,7 +309,6 @@
       </div>
     </div>
 
-    <!-- Contact row with email and mail button -->
     <div class="about-row" aria-label="Email row">
       <div class="label">Mail</div>
       <div class="value">
@@ -310,7 +317,6 @@
           diptarafder17@gmail.com
         </a>
 
-        <!-- Email button in about section -->
         <a class="btn btn-mail" href="mailto:diptarafder17@gmail.com" aria-label="Compose email to Dip">
           <i class="fa-solid fa-paper-plane fa-fw" aria-hidden="true"></i>
           <span>Mail</span>
@@ -318,7 +324,6 @@
       </div>
     </div>
 
-    <!-- Contact number -->
     <div class="about-row" aria-label="Phone row">
       <div class="label">Phone</div>
       <div class="value contact-number">
@@ -327,7 +332,6 @@
       </div>
     </div>
 
-    <!-- Social bars (direct links shown as bars) -->
     <div>
       <div style="color:#9fbfd0;font-weight:600;margin-bottom:8px">Connect</div>
       <div class="social-bars" role="list" aria-label="Social links as bars">
@@ -365,14 +369,12 @@
       </div>
     </div>
 
-    <!-- Payments -->
     <div class="payments" aria-label="Payments">
       <div style="display:flex;justify-content:space-between;align-items:center;">
         <div style="color:#9fbfd0;font-weight:600">Payments</div>
         <div class="hint" style="font-size:12px;color:#9fbfd0">Secure options</div>
       </div>
 
-      <!-- Google Pay / Card (masked) -->
       <div style="display:flex;flex-direction:column;gap:8px;align-items:center;">
         <div class="masked">Visa •••• 9656</div>
         <a class="btn btn-google" href="#" role="button" aria-label="Pay with Google Pay (placeholder)">
@@ -381,11 +383,9 @@
         </a>
       </div>
 
-      <!-- Nagad (scanner square holder using provided image) -->
       <div style="display:flex;flex-direction:column;gap:8px;align-items:center;">
         <div class="masked">Nagad •••• 4861</div>
 
-        <!-- Square scanner holder -->
         <div class="scanner-square" aria-hidden="false" title="Nagad QR scanner">
           <img src="https://i.postimg.cc/wMvRw7VF/Scanners-for-NGD.png" alt="Nagad QR scanner">
         </div>
@@ -401,20 +401,64 @@
       <div style="font-size:12px;color:#9fbfd0;padding-top:6px">Security note: Full card and account numbers are never shown. Payments should use secure gateways and tokenization.</div>
     </div>
 
-    <!-- Additional info -->
     <div style="margin-top:6px;color:#9fbfd0;font-size:13px;line-height:1.45">
       <strong style="color:#e9f9ff">▓▒▒ＣＯＮＴＡＣＴ░░░</strong>
       <p style="margin:8px 0 0 0;color:#9fbfd0;font-size:13px">Dip Tarafder Official @2026</p>
     </div>
   </aside>
 
-  <!-- Center content -->
   <main class="center-card" role="main" aria-label="Main content">
     <h1>◀︎🄳🄸🄿🅃🄰🅁🄰🄵🄳🄴🅁▶︎</h1>
     <p>Desiner // Gamer // Musician</p>
   </main>
 
   <script>
+    // 1. YOUTUBE BGM AUTOMATION LOGIC
+    // Load YouTube IFrame Player API asynchronously
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    var player;
+    function onYouTubeIframeAPIReady() {
+      // NOTE: Replace 'tNkZs5687KU' with any YouTube video ID you want to play
+      const targetVideoId = 'tNkZs5687KU'; 
+
+      player = new YT.Player('audio-player', {
+        height: '0',
+        width: '0',
+        videoId: targetVideoId,
+        playerVars: {
+          'autoplay': 1,
+          'controls': 0,
+          'disablekb': 1,
+          'loop': 1,
+          'playlist': targetVideoId // Required parameter for looping video clips
+        },
+        events: {
+          'onReady': onPlayerReady
+        }
+      });
+    }
+
+    function onPlayerReady(event) {
+      // Intentional 1-second delayed auto-play rule
+      setTimeout(() => {
+        event.target.playVideo();
+      }, 1000);
+
+      // Fallback Engine: Instantly unblocks & streams music upon any initial screen engagement/click
+      const interactToPlay = () => {
+        event.target.playVideo();
+        document.removeEventListener('click', interactToPlay);
+        document.removeEventListener('touchstart', interactToPlay);
+      };
+      document.addEventListener('click', interactToPlay);
+      document.addEventListener('touchstart', interactToPlay);
+    }
+
+    // 2. SIDEBAR PANEL INTERACTIVITY LOGIC
     (function(){
       const toggle = document.getElementById('aboutToggle');
       const panel = document.getElementById('aboutPanel');
@@ -423,18 +467,15 @@
       function openPanel(){
         panel.classList.add('open');
         toggle.setAttribute('aria-expanded','true');
-        // vanish the about button after click
         toggle.style.display = 'none';
       }
 
       function closePanel(){
         panel.classList.remove('open');
         toggle.setAttribute('aria-expanded','false');
-        // restore the about button when panel is closed via close control
         toggle.style.display = '';
       }
 
-      // Toggle opens panel and hides the about button
       toggle.addEventListener('click', (e) => {
         e.stopPropagation();
         if(panel.classList.contains('open')) {
@@ -444,24 +485,21 @@
         }
       });
 
-      // Close button inside panel restores the about button
       closeBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         closePanel();
       });
 
-      // Close when clicking outside the panel — also restore about button
       document.addEventListener('click', (e) => {
         if(!panel.classList.contains('open')) return;
         const inside = panel.contains(e.target) || toggle.contains(e.target);
         if(!inside) closePanel();
       });
 
-      // Esc to close and restore about button
       document.addEventListener('keydown', (e) => {
         if(e.key === 'Escape' && panel.classList.contains('open')) closePanel();
       });
     })();
   </script>
 </body>
-  </html>
+</html>
