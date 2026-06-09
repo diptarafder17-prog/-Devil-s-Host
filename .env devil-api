@@ -1,9 +1,0 @@
-touch .env
-# The URL where your devil-api backend is running
-PRIVATE_DEVIL_API_URL="http://127.0.0.1:8000"
-
-# The authorization key required by devil-api
-PRIVATE_DEVIL_API_KEY="your_secure_api_key_here"
-
-# Optional: Set to "true" if you are developing locally without SSL/HTTPS
-ALLOW_INSECURE_BACKEND="true"
