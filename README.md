@@ -1,3 +1,28 @@
+# Devil Control Stack 😈
+
+An automated web dashboard and REST API management layer built to control shared hosting environments over local UNIX sockets.
+
+## 🚀 Architecture Components
+
+*   **Frontend UI (`devil-web`):** A modern, high-performance web dashboard built with SvelteKit.
+*   **Backend API (`devil-api`):** A lightweight, fast REST layer built using FastAPI that interacts natively with `/var/run/devil2.sock`.
+
+---
+
+## 🛠️ Quick Start & Installation
+
+### 1. Prerequisites
+Ensure you have the following software suites installed on your production box:
+* Node.js (v20+)
+* Python 3.11+
+* Nginx (for web routing)
+
+### 2. Backend Environment (`devil-api/.env`)
+```env
+DEVIL_API_KEY="your_secure_hex_token"
+CORS_ORIGINS="[https://yourdomain.com](https://yourdomain.com)"
+LOG_LEVEL="INFO"
+
 🌌 Gravity Profile — Blurred Photo Background
 
 A sleek, modern, and interactive personal profile landing page inspired by Linktree. Built with pure HTML, CSS, and Vanilla JavaScript, Gravity Profile features stunning glassmorphism effects, interactive 3D animations, and a dynamic blurred background generated from your profile picture.
