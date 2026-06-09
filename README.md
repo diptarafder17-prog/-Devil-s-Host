@@ -84,8 +84,6 @@ gravity-profile/
 │
 ├── index.html
 ├── README.md
-└── assets/
-    └── profile.jpg
 
 ---
 
@@ -96,116 +94,10 @@ Change Profile Picture
 Locate the CSS root variables:
 
 :root {
-  --bg-image: url("YOUR_IMAGE_URL_HERE");
+  --bg-image: url("https://youtu.be/3Dz09I42NkQ?si=8Lyi47e6sJqSJhRP");
 }
 
 Replace with your own image URL:
 
 :root {
   --bg-image: url("https://example.com/profile.jpg");
-}
-
----
-
-Change Avatar
-
-Find:
-
-<img src="YOUR_IMAGE_URL_HERE" alt="Profile picture">
-
-Replace with your image:
-
-<img src="profile.jpg" alt="Dip Tarafder">
-
----
-
-Change Name
-
-Find:
-
-<div class="name">Your Name</div>
-
-Replace:
-
-<div class="name">Dip Tarafder</div>
-
----
-
-Add Social Links
-
-WhatsApp
-
-<a class="btn whatsapp"
-   href="https://wa.me/8801234567890">
-   WhatsApp
-</a>
-
-Instagram
-
-<a class="btn instagram"
-   href="https://instagram.com/yourusername">
-   Instagram
-</a>
-
-Facebook
-
-<a class="btn facebook"
-   href="https://facebook.com/yourprofile">
-   Facebook
-</a>
-
----
-
-🛠 Technologies Used
-
-Technology| Purpose
-HTML5| Structure
-CSS3| Styling
-JavaScript| Interactivity
-Font Awesome| Icons
-Backdrop Filter| Glassmorphism
-CSS Variables| Easy Customization
-
----
-
-📸 Preview
-
-Features include:
-
-- Dynamic blurred photo background
-- Interactive 3D profile card
-- Floating animations
-- Responsive layout
-- Social media buttons
-- Modern UI aesthetics
-
----
-
-🌟 Future Enhancements
-
-- Dark / Light Theme Toggle
-- Spotify Integration
-- Discord Presence Widget
-- Visitor Counter
-- Custom Background Videos
-- Theme Customizer
-
----
-
-📄 License
-
-This project is licensed under the MIT License.
-
-Feel free to use, modify, and distribute.
-
----
-
-👨‍💻 Author
-
-Dip Tarafder
-
-- Developer
-- Designer
-- Content Creator
-
-Made with ❤️ using HTML, CSS & JavaScript.
