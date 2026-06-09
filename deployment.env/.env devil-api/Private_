@@ -11,3 +11,10 @@ ALLOW_INSECURE_BACKEND="true"
 CORS_ORIGINS="http://localhost:5173,https://your-frontend-domain.com"
 uvicorn main:app --reload --port 8000
 npm run dev -- --open
+npm install pm2 -g
+pm2 start node --name "devil-frontend" -- build/index.js
+pm2 start "venv/bin/uvicorn main:app --port 8000" --name "devil-backend"
+pm2 save
+pm2 startup
+sudo apt install certbot python3-certbot-nginx
+sudo certbot --nginx -d yourdomain.com -d www.yourdomain.com
