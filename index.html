@@ -1,513 +1,480 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>CONTACT𖡬DIP — Contact & Payments</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<title>CONTACT • DIP TARAFDER</title>
 
-  <style>
-    :root{
-      --panel-w: 340px;
-      --accent-1: #6be7ff;
-      /* NEW BACKGROUND IMAGE LINK */
-      --bg-img: url("https://i.postimg.cc/65m2f6sz/1780949883702.png");
-      --gmail-red: #d93025;
-      --gmail-red-dark: #b1271b;
-      --nagad-orange: #ff6b00;
-      --glass: rgba(255,255,255,0.04);
-      --bar-bg: rgba(256,255,255,0.001);
-    }
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial;
-      background:#05020a;
-      color:#e9f9ff;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:28px;
-      overflow:hidden;
-    }
+<style>
 
-    /* Background with Motion and Blur */
-    .bg{
-      position:fixed;
-      inset:0;
-      z-index:0;
-      background-image: var(--bg-img);
-      background-size:cover;
-      background-position:center center;
-      /* Slow cinematic zoom and pan motion */
-      animation: bgMotion 26s ease-in-out infinite;
-    }
-    
-    /* Background Motion Keyframes */
-    @keyframes bgMotion {
-      0% { transform: scale(1.05) translate(0, 0); }
-      50% { transform: scale(1.12) translate(-1%, -1%); }
-      100% { transform: scale(1.05) translate(0, 0); }
-    }
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI,sans-serif;
+}
 
-    .bg::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      /* Enhanced Soft Blur Overlay */
-      backdrop-filter: blur(16px) saturate(1.1) contrast(0.9);
-      -webkit-backdrop-filter: blur(16px) saturate(1.1) contrast(0.9);
-      background: linear-gradient(180deg, rgba(6,6,12,0.5), rgba(8,6,18,0.6));
-      mix-blend-mode:multiply;
-      pointer-events:none;
-    }
+body{
+height:100vh;
+overflow:hidden;
 
-    /* About toggle (kept in front frame) */
-    .about-btn{
-      position:fixed;
-      left:18px;
-      top:18px;
-      z-index:9999;
-      display:flex;
-      align-items:center;
-      gap:10px;
-      padding:10px 14px;
-      border-radius:12px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
-      border:1px solid rgba(255,255,255,0.06);
-      color:#fff;
-      box-shadow: 0 12px 36px rgba(0,0,0,0.6);
-      cursor:pointer;
-      backdrop-filter: blur(6px);
-    }
-    .about-btn i{
-      width:36px;
-      height:36px;
-      display:inline-grid;
-      place-items:center;
-      border-radius:10px;
-      background:var(--glass);
-      color:var(--accent-1);
-      font-size:18px;
-    }
-    .about-btn strong{ font-size:13px; display:block; line-height:1; }
-    .about-btn small{ color:#9fbfd0; font-size:11px; display:block; line-height:1; }
+display:flex;
+justify-content:center;
+align-items:center;
 
-    /* Slide-in panel */
-    .about-panel{
-      position:fixed;
-      left:-1px;
-      top:0;
-      bottom:0;
-      width:var(--panel-w);
-      max-width:92vw;
-      transform: translateX(calc(-100% - 8px));
-      z-index:9998;
-      background: linear-gradient(180deg, rgba(12,10,18,0.98), rgba(8,6,18,0.96));
-      border-right:1px solid rgba(255,255,255,0.04);
-      box-shadow: 8px 0 40px rgba(0,0,0,0.6);
-      padding:22px;
-      display:flex;
-      flex-direction:column;
-      gap:16px;
-      transition: transform 360ms cubic-bezier(.2,.9,.3,1);
-      overflow:auto;
-    }
-    .about-panel.open{ transform: translateX(0); }
-    <!-- Background Music (YouTube Embed) -->
-<div style="display:none;">
-  <iframe id="bg-music" 
-    src="https://www.youtube.com/embed/3Dz09I42NkQ?autoplay=1&loop=1&playlist=3Dz09I42NkQ&controls=0&showinfo=0&rel=0&mute=0"
-    frameborder="0"
-    allow="autoplay"
-    allowfullscreen>
-  </iframe>
-</div>
-    /* Close control inside panel */
-    .panel-close{
-      position:absolute;
-      right:10px;
-      top:10px;
-      background:transparent;
-      border:none;
-      color:#cfefff;
-      font-size:18px;
-      cursor:pointer;
-      padding:6px;
-      border-radius:8px;
-    }
-    .panel-close:hover{ background:rgba(255,255,255,0.02); }
+background:
+linear-gradient(
+135deg,
+#04020b,
+#10182f
+);
+}
 
-    /* Profile */
-    .profile-wrap{
-      display:flex;
-      gap:12px;
-      align-items:center;
-      padding-bottom:8px;
-      border-bottom:1px solid rgba(255,255,255,0.03);
-    }
-    .profile-holder{
-      width:84px;
-      height:84px;
-      min-width:84px;
-      border-radius:50%;
-      padding:4px;
-      background: linear-gradient(135deg, rgba(107,231,255,0.12), rgba(188,121,255,0.08));
-      display:grid;
-      place-items:center;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
-      border:1px solid rgba(255,255,255,0.06);
-      overflow:hidden;
-      z-index:10000;
-    }
-    .profile-holder img{ width:100%; height:100%; object-fit:cover; border-radius:50%; display:block; }
-    .profile-meta{ display:flex; flex-direction:column; gap:6px; }
-    .profile-meta .name{ font-weight:700; font-size:15px; color:#e9f9ff; }
-    .profile-meta .sub{ color:#9fbfd0; font-size:13px; }
+body::before{
 
-    /* Rows */
-    .about-row{ display:flex; align-items:center; gap:12px; justify-content:space-between; font-size:14px; color:#cfefff; }
-    .about-row .label{ color:#9fbfd0; font-weight:600; min-width:64px; }
-    .about-row .value{ display:flex; align-items:center; gap:8px; justify-content:flex-end; color:#9fbfd0; }
+content:"";
 
-    .email-link{ color:#9fe8ff; text-decoration:none; font-weight:600; display:inline-flex; gap:8px; align-items:center; }
+position:fixed;
 
-    /* Buttons */
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:8px 12px;
-      border-radius:999px;
-      color:#fff;
-      text-decoration:none;
-      font-weight:700;
-      font-size:13px;
-      border:none;
-      cursor:pointer;
-    }
-    .btn .fa-fw{ width:18px; text-align:center; }
+inset:0;
 
-    .btn-mail{ background: linear-gradient(180deg, var(--gmail-red), var(--gmail-red-dark)); box-shadow: 0 8px 20px rgba(217,48,37,0.18); }
-    .btn-google{ background: linear-gradient(180deg,#1a73e8,#1558b0); box-shadow: 0 8px 20px rgba(26,115,232,0.12); }
-    .btn-nagad{ background: linear-gradient(180deg,var(--nagad-orange),#c84a00); box-shadow: 0 8px 20px rgba(255,107,0,0.12); }
+background:
+url("https://i.postimg.cc/65m2f6sz/1780949883702.png");
 
-    /* Social bars (full-width link bars) */
-    .social-bars{
-      display:flex;
-      flex-direction:column;
-      gap:8px;
-      margin-top:6px;
-    }
-    .social-bar{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      padding:10px 12px;
-      border-radius:10px;
-      background:var(--bar-bg);
-      color:#e9f9ff;
-      text-decoration:none;
-      border:1px solid rgba(255,255,255,0.03);
-      transition:transform .12s ease, box-shadow .12s ease;
-      font-weight:700;
-      font-size:14px;
-    }
-    .social-bar i{ width:22px; text-align:center; font-size:16px; }
-    .social-bar:hover{ transform:translateY(-4px); box-shadow:0 10px 26px rgba(0,0,0,0.45); }
+background-size:cover;
 
-    .social-bar.github{ background: linear-gradient(180deg,#111,#222); color:#fff; }
-    .social-bar.linkedin{ background: linear-gradient(180deg, rgba(10,102,194,0.06), rgba(10,102,194,0.03)); color:#0a66c2; }
-    .social-bar.facebook{ background: linear-gradient(180deg, rgba(59,89,152,0.06), rgba(59,89,152,0.03)); color:#3b5998; }
-    .social-bar.instagram{ background: linear-gradient(180deg, rgba(225,48,108,0.06), rgba(225,48,108,0.03)); color:#e1306c; }
+background-position:center;
 
-    /* Payments block */
-    .payments{
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-      padding-top:6px;
-      border-top:1px solid rgba(255,255,255,0.03);
-    }
-    .payments .hint{ color:#9fbfd0; font-size:13px; }
+filter:
+blur(4px)
+brightness(.55);
 
-    /* Square scanner holder (white square with rounded corners) */
-    .scanner-square{
-      width:220px;
-      height:220px;
-      margin:8px auto;
-      background:#fff;
-      border-radius:12px;
-      padding:10px;
-      display:grid;
-      place-items:center;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.35);
-      overflow:hidden;
-    }
-    .scanner-square img{ width:100%; height:100%; object-fit:contain; border-radius:8px; }
+transform:scale(1.08);
 
-    .masked{ color:#dbefff; font-weight:700; font-size:13px; }
+animation:
+zoom 22s infinite ease;
 
-    /* Contact number */
-    .contact-number{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      color:#9fbfd0;
-      font-weight:700;
-      font-size:14px;
-      margin-top:6px;
-    }
+}
 
-    /* Center card placeholder */
-    .center-card{
-      width:360px;
-      max-width:92vw;
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border-radius:14px;
-      padding:28px;
-      z-index:10;
-      box-shadow: 0 30px 80px rgba(0,0,0,0.7);
-      border:1px solid rgba(255,255,255,0.03);
-      text-align:center;
-    }
-    .center-card h1{ margin:0 0 8px 0; font-size:20px; color:#e9f9ff; }
-    .center-card p{ margin:0; color:#9fbfd0; font-size:13px; }
+@keyframes zoom{
 
-    /* Responsive */
-    @media (max-width:420px){
-      .profile-holder{ width:64px; height:64px; min-width:64px; }
-      .about-panel{ padding:16px; width:92vw; }
-      .scanner-square{ width:180px; height:180px; }
-      .social-bar{ font-size:13px; padding:10px; }
-    }
-  </style>
+50%{
+transform:
+scale(1.15);
+}
+
+}
+
+/* ABOUT BUTTON */
+
+.about{
+
+position:relative;
+
+z-index:20;
+
+width:260px;
+
+height:260px;
+
+border:none;
+
+cursor:pointer;
+
+border-radius:40px;
+
+overflow:hidden;
+
+backdrop-filter:blur(18px);
+
+background:
+linear-gradient(
+145deg,
+rgba(255,255,255,.06),
+rgba(255,255,255,.02)
+);
+
+box-shadow:
+0 30px 80px rgba(0,0,0,.55);
+
+color:white;
+
+display:flex;
+
+flex-direction:column;
+
+align-items:center;
+
+justify-content:center;
+
+gap:16px;
+
+transition:.4s;
+
+}
+
+.about:hover{
+
+transform:
+translateY(-10px)
+scale(1.03);
+
+}
+
+.about::before{
+
+content:"";
+
+position:absolute;
+
+inset:-60%;
+
+background:
+linear-gradient(
+90deg,
+transparent,
+rgba(107,231,255,.18),
+transparent
+);
+
+animation:
+shine 6s linear infinite;
+
+}
+
+@keyframes shine{
+
+100%{
+transform:
+translateX(350%);
+}
+
+}
+
+.about img{
+
+width:120px;
+
+height:120px;
+
+border-radius:50%;
+
+object-fit:cover;
+
+border:5px solid rgba(255,255,255,.15);
+
+z-index:2;
+
+}
+
+.about h2{
+
+font-size:26px;
+
+z-index:2;
+
+}
+
+.about p{
+
+opacity:.8;
+
+z-index:2;
+
+}
+
+/* PANEL */
+
+.panel{
+
+position:fixed;
+
+left:50%;
+
+top:50%;
+
+transform:
+translate(-50%,-50%)
+scale(.85);
+
+opacity:0;
+
+pointer-events:none;
+
+width:420px;
+
+max-width:92vw;
+
+padding:28px;
+
+border-radius:34px;
+
+background:
+linear-gradient(
+180deg,
+rgba(10,14,28,.95),
+rgba(14,18,36,.95)
+);
+
+backdrop-filter:
+blur(28px);
+
+box-shadow:
+0 40px 100px rgba(0,0,0,.65);
+
+transition:.35s;
+
+z-index:50;
+
+color:white;
+
+}
+
+.panel.open{
+
+opacity:1;
+
+transform:
+translate(-50%,-50%)
+scale(1);
+
+pointer-events:auto;
+
+}
+
+.close{
+
+position:absolute;
+
+right:18px;
+
+top:18px;
+
+font-size:22px;
+
+cursor:pointer;
+
+opacity:.8;
+
+}
+
+.profile{
+
+text-align:center;
+
+}
+
+.profile img{
+
+width:150px;
+
+height:150px;
+
+border-radius:50%;
+
+object-fit:cover;
+
+border:6px solid rgba(107,231,255,.18);
+
+box-shadow:
+0 0 40px rgba(107,231,255,.18);
+
+}
+
+.name{
+
+margin-top:18px;
+
+font-size:30px;
+
+font-weight:800;
+
+}
+
+.role{
+
+margin-top:6px;
+
+opacity:.8;
+
+}
+
+.row{
+
+margin-top:22px;
+
+padding:14px;
+
+border-radius:18px;
+
+background:
+rgba(255,255,255,.04);
+
+display:flex;
+
+gap:12px;
+
+align-items:center;
+
+}
+
+.row i{
+
+font-size:22px;
+
+width:36px;
+
+color:#6be7ff;
+
+}
+
+.row a{
+
+color:white;
+
+text-decoration:none;
+
+}
+
+.footer{
+
+margin-top:18px;
+
+text-align:center;
+
+opacity:.65;
+
+}
+
+@media(max-width:480px){
+
+.about{
+
+width:220px;
+
+height:230px;
+
+}
+
+.about img{
+
+width:100px;
+
+height:100px;
+
+}
+
+}
+
+</style>
 </head>
+
 <body>
-  <div class="bg" aria-hidden="true"></div>
 
-  <div id="audio-player" style="position:absolute; width:0; height:0; opacity:0; pointer-events:none; visibility:hidden;"></div>
+<button class="about" id="open">
 
-  <button id="aboutToggle" class="about-btn" aria-expanded="false" aria-controls="aboutPanel">
-    <i aria-hidden="true"><span class="fa-solid fa-circle-user"></span></i>
-    <div style="display:flex;flex-direction:column;align-items:flex-start;line-height:1;">
-      <strong> ░ＣＯＮＴＡＣＴ</strong>
-      <small> <br>❕informmations are here⏎</small>
-    </div>
-  </button>
+<img
+src="https://i.postimg.cc/brFbb6tf/2026-06-18-20-04-10-481-0600-2.jpg"
+alt="Dip Profile">
 
-  <aside id="aboutPanel" class="about-panel" role="region" aria-label="About panel">
-    <button id="panelClose" class="panel-close" aria-label="Close panel">
-      <i class="fa-solid fa-xmark" aria-hidden="true"></i>
-    </button>
+<h2>ABOUT</h2>
 
-    <div class="profile-wrap">
-      <div class="profile-holder" role="img" aria-label="Profile picture of Dip">
-        <img src="https://i.postimg.cc/1ttLkCZL/kmc-20260603-061347.png" alt="Dip profile picture">
-      </div>
-      <div class="profile-meta">
-        <div class="name">DIP TARAFDER</div>
-        <div class="sub">𓂊ʟɪɢʜᴛ𖡬ʀᴏᴀᴅ⇝ʀɪᴅᴇ́͠<br>Hyper Frontend Developer — Dhaka, Bangladesh</div>
-        <div style="color:#9fbfd0;font-size:13px">Age 21+<br>--ꚰNagarpur, Tangail</div>
-      </div>
-    </div>
+<p>Tap To Open<br>@diptarafderr</></p>
 
-    <div class="about-row" aria-label="Email row">
-      <div class="label">Mail</div>
-      <div class="value">
-        <a class="email-link" href="mailto:diptarafder17@gmail.com" aria-label="Send email to Dip">
-          <i class="fa-regular fa-envelope fa-fw" aria-hidden="true"></i>
-          diptarafder17@gmail.com
-        </a>
+</button>
 
-        <a class="btn btn-mail" href="mailto:diptarafder17@gmail.com" aria-label="Compose email to Dip">
-          <i class="fa-solid fa-paper-plane fa-fw" aria-hidden="true"></i>
-          <span>Mail</span>
-        </a>
-      </div>
-    </div>
+<div class="panel" id="panel">
 
-    <div class="about-row" aria-label="Phone row">
-      <div class="label">Phone</div>
-      <div class="value contact-number">
-        <i class="fa-solid fa-phone" aria-hidden="true"></i>
-        <span>+8801761613854</span>
-      </div>
-    </div>
+<div class="close" id="close">
+✕
+</div>
 
-    <div>
-      <div style="color:#9fbfd0;font-weight:600;margin-bottom:8px">Connect</div>
-      <div class="social-bars" role="list" aria-label="Social links as bars">
-        <a class="social-bar github" role="listitem"
-           href="https://github.com/diptarafder17-prog"
-           target="_blank" rel="noopener noreferrer"
-           aria-label="GitHub profile" title="GitHub">
-          <i class="fa-brands fa-github" aria-hidden="true"></i>
-          <span>GitHub</span>
-        </a>
+<div class="profile">
 
-        <a class="social-bar linkedin" role="listitem"
-           href="https://www.linkedin.com/me?trk=p_mwlite_profile_view-secondary_nav"
-           target="_blank" rel="noopener noreferrer"
-           aria-label="LinkedIn profile" title="LinkedIn">
-          <i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>
-          <span>LinkedIn</span>
-        </a>
+<img
+src="https://i.postimg.cc/brFbb6tf/2026-06-18-20-04-10-481-0600-2.jpg"
+alt="Dip Profile">
 
-        <a class="social-bar facebook" role="listitem"
-           href="https://www.facebook.com/share/1CWxsPp1KB/"
-           target="_blank" rel="noopener noreferrer"
-           aria-label="Facebook profile" title="Facebook">
-          <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
-          <span>Facebook</span>
-        </a>
+<div class="name">
+DIP TARAFDER
+</div>
 
-        <a class="social-bar instagram" role="listitem"
-           href="https://www.instagram.com/diptarafderr?igsh=MWd3c3N2bjZzZGFrbw=="
-           target="_blank" rel="noopener noreferrer"
-           aria-label="Instagram profile" title="Instagram">
-          <i class="fa-brands fa-instagram" aria-hidden="true"></i>
-          <span>Instagram</span>
-        </a>
-      </div>
-    </div>
+<div class="role">
+Designer • Gamer • Musician
+</div>
 
-    <div class="payments" aria-label="Payments">
-      <div style="display:flex;justify-content:space-between;align-items:center;">
-        <div style="color:#9fbfd0;font-weight:600">Payments</div>
-        <div class="hint" style="font-size:12px;color:#9fbfd0">Secure options</div>
-      </div>
+</div>
 
-      <div style="display:flex;flex-direction:column;gap:8px;align-items:center;">
-        <div class="masked">Visa •••• 9656</div>
-        <a class="btn btn-google" href="#" role="button" aria-label="Pay with Google Pay (placeholder)">
-          <i class="fa-brands fa-google fa-fw" aria-hidden="true"></i>
-          <span>Pay with Google Pay</span>
-        </a>
-      </div>
+<div class="row">
+<i class="fa-solid fa-envelope"></i>
+<a href="mailto:diptarafder17@gmail.com">
+diptarafder17@gmail.com
+</a>
+</div>
 
-      <div style="display:flex;flex-direction:column;gap:8px;align-items:center;">
-        <div class="masked">Nagad •••• 4861</div>
+<div class="row">
+<i class="fa-solid fa-phone"></i>
++8801761613854
+</div>
 
-        <div class="scanner-square" aria-hidden="false" title="Nagad QR scanner">
-          <img src="https://i.postimg.cc/wMvRw7VF/Scanners-for-NGD.png" alt="Nagad QR scanner">
-        </div>
+<div class="row">
+<i class="fa-brands fa-facebook"></i>
+<a href="https://www.facebook.com/share/1CWxsPp1KB/">
+Facebook
+</a>
+</div>
 
-        <a class="btn btn-nagad" href="https://q.me-qr.com/y41t1tth" target="_blank" rel="noopener noreferrer" aria-label="Open Nagad payment">
-          <i class="fa-solid fa-mobile-screen-button fa-fw" aria-hidden="true"></i>
-          <span>@Nagad/8801731544861</span>
-        </a>
+<div class="row">
+<i class="fa-brands fa-instagram"></i>
+<a href="https://www.instagram.com/diptarafderr">
+Instagram
+</a>
+</div>
 
-        <div style="font-size:12px;color:#9fbfd0">Tip: scan the square QR above or tap to open Nagad checkout</div>
-      </div>
+<div class="footer">
+Dip Tarafder • Official
+</div>
 
-      <div style="font-size:12px;color:#9fbfd0;padding-top:6px">Security note: Full card and account numbers are never shown. Payments should use secure gateways and tokenization.</div>
-    </div>
+</div>
 
-    <div style="margin-top:6px;color:#9fbfd0;font-size:13px;line-height:1.45">
-      <strong style="color:#e9f9ff">▓▒▒ＣＯＮＴＡＣＴ░░░</strong>
-      <p style="margin:8px 0 0 0;color:#9fbfd0;font-size:13px">Dip Tarafder Official @2026</p>
-    </div>
-  </aside>
+<script>
 
-  <main class="center-card" role="main" aria-label="Main content">
-    <h1>◀︎🄳🄸🄿🅃🄰🅁🄰🄵🄳🄴🅁▶︎</h1>
-    <p>Desiner // Gamer // Musician</p>
-  </main>
+const open=
+document.getElementById("open");
 
-  <script>
-    // 1. YOUTUBE BGM AUTOMATION LOGIC
-    // Load YouTube IFrame Player API asynchronously
-    var tag = document.createElement('script');
-    tag.src = "https://www.youtube.com/iframe_api";
-    var firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+const panel=
+document.getElementById("panel");
 
-    var player;
-    function onYouTubeIframeAPIReady() {
-      // NOTE: Replace 'tNkZs5687KU' with any YouTube video ID you want to play
-      const targetVideoId = 'tNkZs5687KU'; 
+const close=
+document.getElementById("close");
 
-      player = new YT.Player('audio-player', {
-        height: '0',
-        width: '0',
-        videoId: targetVideoId,
-        playerVars: {
-          'autoplay': 1,
-          'controls': 0,
-          'disablekb': 1,
-          'loop': 1,
-          'playlist': targetVideoId // Required parameter for looping video clips
-        },
-        events: {
-          'onReady': onPlayerReady
-        }
-      });
-    }
+open.onclick=()=>{
 
-    function onPlayerReady(event) {
-      // Intentional 1-second delayed auto-play rule
-      setTimeout(() => {
-        event.target.playVideo();
-      }, 1000);
+panel.classList.add("open");
 
-      // Fallback Engine: Instantly unblocks & streams music upon any initial screen engagement/click
-      const interactToPlay = () => {
-        event.target.playVideo();
-        document.removeEventListener('click', interactToPlay);
-        document.removeEventListener('touchstart', interactToPlay);
-      };
-      document.addEventListener('click', interactToPlay);
-      document.addEventListener('touchstart', interactToPlay);
-    }
+};
 
-    // 2. SIDEBAR PANEL INTERACTIVITY LOGIC
-    (function(){
-      const toggle = document.getElementById('aboutToggle');
-      const panel = document.getElementById('aboutPanel');
-      const closeBtn = document.getElementById('panelClose');
+close.onclick=()=>{
 
-      function openPanel(){
-        panel.classList.add('open');
-        toggle.setAttribute('aria-expanded','true');
-        toggle.style.display = 'none';
-      }
+panel.classList.remove("open");
 
-      function closePanel(){
-        panel.classList.remove('open');
-        toggle.setAttribute('aria-expanded','false');
-        toggle.style.display = '';
-      }
+};
 
-      toggle.addEventListener('click', (e) => {
-        e.stopPropagation();
-        if(panel.classList.contains('open')) {
-          closeBtn.click();
-        } else {
-          openPanel();
-        }
-      });
+window.onclick=(e)=>{
 
-      closeBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        closePanel();
-      });
+if(e.target===panel){
 
-      document.addEventListener('click', (e) => {
-        if(!panel.classList.contains('open')) return;
-        const inside = panel.contains(e.target) || toggle.contains(e.target);
-        if(!inside) closePanel();
-      });
+panel.classList.remove("open");
 
-      document.addEventListener('keydown', (e) => {
-        if(e.key === 'Escape' && panel.classList.contains('open')) closePanel();
-      });
-    })();
-  </script>
+}
+
+};
+
+</script>
+
 </body>
 </html>
